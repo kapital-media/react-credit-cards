@@ -16,7 +16,7 @@ jobs:
           node-version: 18
       - run: yarn install --frozen-lockfile
       - run: yarn build
-      - run: npx semantic-release --branches main
+      - run: npx semantic-release --branches master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
