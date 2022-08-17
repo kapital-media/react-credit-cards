@@ -18,7 +18,7 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["prettier", "unused-imports", "@typescript-eslint"],
+  "plugins": ["prettier", "unused-imports", "@typescript-eslint", "react"],
   "rules": {
     "prefer-const": "error",
     "no-case-declarations": "off",

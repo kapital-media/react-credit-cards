@@ -123,6 +123,8 @@ const getVisibleExpiry = (expiry: string | number) => {
 const getClassName = (classes: string[]) => {
   return (classes || []).join(" ").trim();
 };
+
+const ORIGINAL_CARD_ARRAY = Payment.getCardArray();
 export const ReactCreditCards = ({
   issuer: _issuer,
   preview = false,
@@ -164,8 +166,8 @@ export const ReactCreditCards = ({
       Payment.setCardArray(newCardArray);
       return;
     }
-    Payment.setCardArray(Payment.getCardArray());
-  }, []);
+    Payment.setCardArray(ORIGINAL_CARD_ARRAY);
+  }, [acceptedCards]);
 
   const mainClassName = getClassName([
     "rccs__card",
