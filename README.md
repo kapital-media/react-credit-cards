@@ -1,12 +1,8 @@
-# React Credit Cards
+# React Credit Card
 
-[![NPM](https://badge.fury.io/js/react-credit-cards.svg)](https://www.npmjs.com/package/react-credit-cards) [![Travis](https://travis-ci.org/amarofashion/react-credit-cards.svg?branch=master)](https://travis-ci.org/amarofashion/react-credit-cards) [![Maintainability](https://api.codeclimate.com/v1/badges/bb0aa1a6b782c3845f6a/maintainability)](https://codeclimate.com/github/amarofashion/react-credit-cards/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/bb0aa1a6b782c3845f6a/test_coverage)](https://codeclimate.com/github/amarofashion/react-credit-cards/test_coverage)
+[![NPM](https://badge.fury.io/js/react-credit-card-component.svg)](https://www.npmjs.com/package/react-credit-card-component)
 
-A slick credit card component for React.
-
-![demo](https://raw.githubusercontent.com/amarofashion/react-credit-cards/master/docs/media/rccs.gif)
-
-[Demo](https://amarofashion.github.io/react-credit-cards/)
+A credit card component for React, based on https://github.com/amaroteam/react-credit-cards, with typescript support
 
 ### Install
 
@@ -17,32 +13,33 @@ npm install --save react-credit-cards
 ### Usage
 
 ```jsx
-import React from 'react';
-import Cards from 'react-credit-cards';
+import React from "react";
+import Card from "react-credit-card-component";
+import "react-credit-card-component/dist/styles-compiled.css";
 
 export default class PaymentForm extends React.Component {
   state = {
-    cvc: '',
-    expiry: '',
-    focus: '',
-    name: '',
-    number: '',
+    cvc: "",
+    expiry: "",
+    focus: "",
+    name: "",
+    number: "",
   };
 
   handleInputFocus = (e) => {
     this.setState({ focus: e.target.name });
-  }
-  
+  };
+
   handleInputChange = (e) => {
     const { name, value } = e.target;
-    
+
     this.setState({ [name]: value });
-  }
-  
+  };
+
   render() {
     return (
       <div id="PaymentForm">
-        <Cards
+        <Card
           cvc={this.state.cvc}
           expiry={this.state.expiry}
           focused={this.state.focus}
@@ -50,7 +47,7 @@ export default class PaymentForm extends React.Component {
           number={this.state.number}
         />
         <form>
-        	<input
+          <input
             type="tel"
             name="number"
             placeholder="Card Number"
@@ -65,9 +62,9 @@ export default class PaymentForm extends React.Component {
 }
 ```
 
-Don't forget to import the `react-credit-cards/lib/styles.scss` if you are using SASS in your project.  
+Don't forget to import the `react-credit-card-component/dist/style.scss` if you are using SASS in your project.  
 Or you can import the CSS:  
-`import 'react-credit-cards/es/styles-compiled.css';`
+`import 'react-credit-card-component/dist/styles-compiled.css';`
 
 ### Features
 
@@ -85,9 +82,6 @@ Or you can import the CSS:
 - `preview` {bool}: To use the card to show scrambled data (e.g. `**** 4567`).
 - `issuer` {string}: Set the issuer for the `preview` mode (e.g. `visa|mastercard|...`)
 - `acceptedCards` {array}: If you want to limit the accepted cards. (e.g. `['visa', 'mastercard']`
-- `callback` {func}: A callback function that will be called when the card number has changed with 2 paramaters: `type ({ issuer: 'visa', maxLength: 19 }), isValid ({boolean})`
-
-\* _Required fields_
 
 ## SCSS options
 
@@ -132,21 +126,6 @@ Or you can import the CSS:
 - `$rccs-elo-background`: Defaults to `linear-gradient(25deg, #211c18, #aaa7a2)`
 - `$rccs-hipercard-background`: Defaults to `linear-gradient(25deg, #8b181b, #de1f27)`
 
-## Development
-
-Here's how you can get started developing locally:
-
-    $ git clone https://github.com/amarofashion/react-credit-cards.git
-    $ cd react-credit-cards
-    $ npm install
-    $ npm start
-
-Now, if you go to `http://localhost:3000` in your browser, you should see the demo page.
-
-## Contributing
-
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process of contributing to the project.
-
 ## Useful links
 
 [EBANK's test numbers](https://www.ebanx.com/business/en/developers/integrations/testing/credit-card-test-numbers)  
@@ -157,5 +136,3 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 ## LICENSE
 
 This project is licensed under the [MIT License](LICENSE.md).
-
-###### Made with ❤️ at [AMARO](https://amaro.com).

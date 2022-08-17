@@ -36,6 +36,10 @@ interface IReactCreditCardsProps {
     name?: string;
   };
   preview?: boolean;
+  onNumberClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
+  onCvvClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
+  onNameClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
+  onExpiryClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 const getMaxLengthFromIssuer = (issuer: string) => {
@@ -116,6 +120,9 @@ const getVisibleExpiry = (expiry: string | number) => {
   return `${month}/${year}`;
 };
 
+const getClassName = (classes: string[]) => {
+  return (classes || []).join(" ").trim();
+};
 export const ReactCreditCards = ({
   issuer: _issuer,
   preview = false,
@@ -131,6 +138,10 @@ export const ReactCreditCards = ({
   placeholders = {
     name: "John Doe",
   },
+  onNumberClick,
+  onCvvClick,
+  onNameClick,
+  onExpiryClick,
 }: IReactCreditCardsProps) => {
   const cardNumber = String(number);
 
@@ -156,44 +167,56 @@ export const ReactCreditCards = ({
     Payment.setCardArray(Payment.getCardArray());
   }, []);
 
-  const mainClassName = [
+  const mainClassName = getClassName([
     "rccs__card",
-    `rccs__card--${_issuer}`,
-    focused === "cvc" && _issuer !== "amex" ? "rccs__card--flipped" : "",
-  ]
-    .join(" ")
-    .trim();
-  const nameClassname = ["rccs__name", focused === "name" ? "rccs--focused" : "", name ? "rccs--filled" : ""]
-    .join(" ")
-    .trim();
-  const numberClassName = [
+    `rccs__card--${issuer}`,
+    focused === "cvc" && issuer !== "amex" ? "rccs__card--flipped" : "",
+  ]);
+  const nameClassname = getClassName([
+    "rccs__name",
+    focused === "name" ? "rccs--focused" : "",
+    name ? "rccs--filled" : "",
+    onNameClick ? "clickable" : "",
+  ]);
+  const numberClassName = getClassName([
     "rccs__number",
     numberToShow.replace(/ /g, "").length > 16 ? "rccs__number--large" : "",
     focused === "number" ? "rccs--focused" : "",
     numberToShow.substring(0, 1) !== "•" ? "rccs--filled" : "",
-  ]
-    .join(" ")
-    .trim();
-  const cvcClassName = ["rccs__cvc__front", focused === "cvc" ? "rccs--focused" : ""].join(" ").trim();
-
+    onNumberClick ? "clickable" : "",
+  ]);
+  const cvcClassName = getClassName([
+    "rccs__cvc__front",
+    focused === "cvc" ? "rccs--focused" : "",
+    onCvvClick ? "clickable" : "",
+  ]);
+  const expiryClassName = getClassName([
+    "rccs__expiry",
+    focused === "expiry" ? "rccs--focused" : "",
+    expiry.substring(0, 1) !== "•" ? "rccs--filled" : "",
+    onExpiryClick ? "clickable" : "",
+  ]);
+  const cvvClassName = getClassName([
+    "rccs__cvc",
+    focused === "cvc" ? "rccs--focused" : "",
+    onCvvClick ? "clickable" : "",
+  ]);
   return (
     <div key="Cards" className="rccs">
       <div className={mainClassName}>
         <div className="rccs__card--front">
           <div className="rccs__card__background" />
           <div className="rccs__issuer" />
-          <div className={cvcClassName}>{cvc}</div>
-          <div className={numberClassName}>{numberToShow}</div>
-          <div className={nameClassname}>{name || placeholders.name}</div>
-          <div
-            className={[
-              "rccs__expiry",
-              focused === "expiry" ? "rccs--focused" : "",
-              expiry.substring(0, 1) !== "•" ? "rccs--filled" : "",
-            ]
-              .join(" ")
-              .trim()}
-          >
+          <div className={cvcClassName} onClick={onCvvClick}>
+            {cvc}
+          </div>
+          <div className={numberClassName} onClick={onNumberClick}>
+            {numberToShow}
+          </div>
+          <div className={nameClassname} onClick={onNameClick}>
+            {name || placeholders.name}
+          </div>
+          <div className={expiryClassName} onClick={onExpiryClick}>
             <div className="rccs__expiry__valid">{locale.valid}</div>
             <div className="rccs__expiry__value">{expiry}</div>
           </div>
@@ -203,7 +226,9 @@ export const ReactCreditCards = ({
           <div className="rccs__card__background" />
           <div className="rccs__stripe" />
           <div className="rccs__signature" />
-          <div className={["rccs__cvc", focused === "cvc" ? "rccs--focused" : ""].join(" ").trim()}>{cvc}</div>
+          <div className={cvvClassName} onClick={onCvvClick}>
+            {cvc}
+          </div>
           <div className="rccs__issuer" />
         </div>
       </div>
