@@ -1,6 +1,6 @@
 {
   "name": "react-credit-card-component",
-  "version": "0.0.0-development",
+  "version": "1.0.0",
   "description": "Preview your credit card component",
   "author": "JonLuca DeCaro <cards@jonlu.ca>",
   "repository": {

@@ -125,6 +125,7 @@ const getClassName = (classes: string[]) => {
 };
 
 const ORIGINAL_CARD_ARRAY = Payment.getCardArray();
+
 export const ReactCreditCards = ({
   issuer: _issuer,
   preview = false,
