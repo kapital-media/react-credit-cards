@@ -27,6 +27,7 @@
     "src"
   ],
   "scripts": {
+    "prepare": "npm run build",
     "build": "rimraf dist/* && tsc -p tsconfig.json && tsc -p tsconfig-cjs.json && node scripts/fixup.js",
     "build:styles": " node tools/build-styles",
     "typecheck": "tsc --noEmit",
