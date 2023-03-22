@@ -78,7 +78,7 @@ const getVisibleCardNumber = (cardNumber: string, maxLength: number, preview: bo
     case "amex":
     case "dinersclub":
     case "diners":
-      return `${nextNumber.substring(0, 4)} ${nextNumber.substring(4, 6)} ${nextNumber.substring(10, 5)}`;
+      return `${nextNumber.substring(0, 4)} ${nextNumber.substring(4, 10)} ${nextNumber.substring(10, 15)}`;
     default:
       if (nextNumber.length > 16) {
         const format = [0, 4, 8, 12];
