@@ -22,11 +22,9 @@ const getMaxLengthFromIssuer = (issuer) => {
     switch (issuer) {
         case "amex":
             return 15;
-        case "diners":
-        case "dinersclub":
-            return 14;
         case "hipercard":
         case "mastercard":
+        case "unionpay":
         case "visa":
             return 19;
         default:
@@ -49,8 +47,6 @@ const getVisibleCardNumber = (cardNumber, maxLength, preview, issuer) => {
     }
     switch (issuer) {
         case "amex":
-        case "dinersclub":
-        case "diners":
             return `${nextNumber.substring(0, 4)} ${nextNumber.substring(4, 10)} ${nextNumber.substring(10, 15)}`;
         default:
             if (nextNumber.length > 16) {
