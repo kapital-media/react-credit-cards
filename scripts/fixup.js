@@ -21,7 +21,7 @@ try {
 console.log("Building styles");
 
 run("rm -rf .tmp/")
-  .then(() => run("node-sass -o .tmp/ src/styles.scss"))
+  .then(() => run("sass src/styles.scss .tmp/styles.css"))
   .then(() => run("postcss .tmp/styles.css --use autoprefixer --no-map -d .tmp/"))
   .then(() => run("mv .tmp/styles.css .tmp/styles-compiled.css"))
   .then(() => run("cp .tmp/styles-compiled.css dist"))
